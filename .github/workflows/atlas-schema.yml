@@ -2,12 +2,18 @@ name: Atlas science schema checks
 on:
   pull_request:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - run: node tests/atlas-schema.test.cjs
+      - name: Validate draft 2020-12 schema with positive and negative fixtures
+        run: |
+          npm install --no-save --no-package-lock ajv@8 ajv-formats@3
+          node tests/atlas-schema-validation.cjs
