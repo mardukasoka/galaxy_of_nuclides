@@ -1,0 +1,11 @@
+const fs = require('node:fs');
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const schema = JSON.parse(fs.readFileSync(path.join(__dirname,'../docs/atlas-science-record.schema.json'),'utf8'));
+const sample = JSON.parse(fs.readFileSync(path.join(__dirname,'../docs/examples/muonic-hydrogen.placeholder.json'),'utf8'));
+assert.equal(schema.$schema,'https://json-schema.org/draft/2020-12/schema');
+for (const field of schema.required) assert.ok(Object.hasOwn(sample,field), 'missing '+field);
+assert.ok(schema.properties.kind.enum.includes(sample.kind));
+assert.ok(schema.properties.status.enum.includes(sample.status));
+assert.equal(sample.status,'unverified');
+console.log('Schema and placeholder structural checks passed; full JSON Schema validation still required.');

@@ -1,0 +1,15 @@
+{
+  "id": "atlas:exotic-atom:muonic-hydrogen",
+  "kind": "exotic-atom",
+  "status": "unverified",
+  "source": {
+    "url": "https://www.nist.gov/",
+    "retrieved": "2026-10-25",
+    "dataset_version": null
+  },
+  "values": {},
+  "uncertainty": {},
+  "related_ids": [
+    "atlas:nuclide:Z1-N0-ground"
+  ]
+}

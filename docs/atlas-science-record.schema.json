@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mardukasoka/galaxy_of_nuclides/blob/master/docs/atlas-science-record.schema.json",
+  "title": "Atlas science cross-reference record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "kind",
+    "status",
+    "source"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^atlas:[a-z-]+:[A-Za-z0-9._-]+$"
+    },
+    "kind": {
+      "enum": [
+        "nuclide",
+        "hypernucleus",
+        "exotic-atom",
+        "quarkonium",
+        "quasiparticle",
+        "phase",
+        "transition"
+      ]
+    },
+    "status": {
+      "enum": [
+        "evaluated",
+        "measured",
+        "derived",
+        "candidate",
+        "unverified"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "retrieved"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "retrieved": {
+          "type": "string",
+          "format": "date"
+        },
+        "dataset_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "values": {
+      "type": "object"
+    },
+    "uncertainty": {
+      "type": "object"
+    },
+    "related_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
